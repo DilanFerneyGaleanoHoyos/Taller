@@ -148,6 +148,7 @@ int main() {
                 printf("El orden ingresado no es impar. Por favor, ingrese un numero impar.\n");
                 return 0;
             }
+
             generarMatrizMagica(n);
             break;
         }
