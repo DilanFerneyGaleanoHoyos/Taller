@@ -4,6 +4,28 @@
 #include <ctype.h>
 #include <math.h>
 
+int dotProduct(int v1[], int v2[], int s){
+
+    int aux[s];
+
+    for(int i = 0; i<s;i++){
+
+        int mult = v1[i]*v2[i];
+
+        aux[i] = mult;
+
+    }
+
+    int add = 0;
+
+    for(int i = 0; i<s;i++){
+
+        add = add + aux[i];
+    }
+
+    return add;
+}
+
 int numberDigits(int num){
 
     int dig = 0;
@@ -280,6 +302,42 @@ int main() {
                 printf("Lo lamento, %i no es un numero magico",num);
             }
 
+            break;
+
+        }
+
+        case 6:{
+
+            int s;
+
+            printf("Digite el tamano que desea para los dos arreglos\n");
+            scanf("%i",&s);
+            system("cls");
+
+            int v1[s];
+            int v2[s];
+
+            for(int i = 0; i<s;i++){
+
+                printf("\nDigite el valor del vector 1 en la posicion: %i\n",i+1);
+                scanf("%i",&v1[i]);
+                system("cls");//Limpiar consola para windows, en UNIX y Linus es "system("clear")"
+            }
+
+            for(int i = 0; i<s;i++){
+
+                printf("\nDigite el valor del vector 2 en la posicion: %i\n",i+1);
+                scanf("%i",&v2[i]);
+                system("cls");
+            }
+
+            if(v1 == NULL || v2 ==NULL){
+                printf("Alguno de los vectores es nulo, por ende no se puede realizar la operacion.");
+            }else{
+                printf("El producto punto entre ambos vectores es: %i",dotProduct(v1,v2,s));
+            }
+
+            break;
         }
         default:
             printf("Opción inválida. Por favor, seleccione una opción válida.\n");
