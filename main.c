@@ -1,7 +1,83 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+
+int numberDigits(int num){
+
+    int dig = 0;
+
+    while (num > 0) {
+        num = num / 10;
+        dig = dig+1;
+    }
+
+    return dig;
+
+}
+
+int magicNumber(int num, int s){
+
+    int upward[s];
+    int falling[s];
+    int dig;
+
+    int i=0;
+    while (num > 0) {
+
+        dig = num % 10;
+
+        upward[i]=dig;
+        falling[i]=dig;
+
+        num = num / 10;
+
+        i++;
+    }
+
+    int size = sizeof(falling)/ sizeof(falling[0]);
+
+    for (int j = 0; j < size; ++j) {
+
+        for (int k = j; k < size-1; ++k) {
+
+            if(falling[j]<falling[k+1]){
+
+                int aux = falling[j];
+                falling[j]= falling[k+1];
+                falling[k+1] = aux;
+            }
+
+        }
+
+    }
+
+    for (int j = 0; j < size-1; ++j) {
+
+        for (int k = j; k < size-1; ++k) {
+
+            if(upward[j]>upward[k+1]){
+
+                int aux = upward[j];
+                upward[j]= upward[k+1];
+                upward[k+1] = aux;
+            }
+
+        }
+
+    }
+    int numFall=0;
+    for (int j = 0; j < size; ++j) {
+        numFall=(numFall*10)+falling[j];
+    }
+    int numUp=0;
+    for (int j = 0; j < size; ++j) {
+        numUp=(numUp*10)+upward[j];
+    }
+
+    return numFall - numUp;
+}
 
 int countDigits(int num) {
     int count = 0;
@@ -180,6 +256,30 @@ int main() {
 
             calculatePrimeFactors(num);
             break;
+        }
+        case 5:{
+
+            int num;
+
+            do {
+
+                printf("Digite el numero que desea comprobar\n");
+                scanf("%i", &num);
+                system("cls");
+
+            }while(numberDigits(num)<=1);
+
+
+
+            if(magicNumber(num,numberDigits(num)) == num){
+
+                printf("Felicidades, %i es un numero magico",num);
+
+            }else{
+
+                printf("Lo lamento, %i no es un numero magico",num);
+            }
+
         }
         default:
             printf("Opción inválida. Por favor, seleccione una opción válida.\n");
