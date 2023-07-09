@@ -123,6 +123,7 @@ int main() {
     printf("3. Eliminar espacios de una cadena de texto.\n");
     printf("4. Calcular los factores primos de un numero.\n");
     printf("5. Numero Magico.\n");
+    printf("6. Producto punto.\n");
 
     printf("Ingrese el numero de opcion: ");
     scanf("%d", &option);
