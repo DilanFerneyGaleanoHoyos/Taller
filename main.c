@@ -469,6 +469,7 @@ int main() {
                 break;
 
             case 6: {
+                printf("\n----- NUMERO ROMANO ----\n");
                 char romanNumber[100];
 
                 printf("Ingrese un numero en romano: ");
