@@ -3,37 +3,37 @@
 #include <ctype.h>
 #include <math.h>
 
-int contarDigitos(int num) {
-    int contador = 0;
+int countDigits(int num) {
+    int count = 0;
     while (num != 0) {
         num /= 10;
-        contador++;
+        count++;
     }
-    return contador;
+    return count;
 }
 
-int esNumeroEgolatra(int num) {
-    int n = contarDigitos(num);
+int isNarcissisticNumber(int num) {
+    int n = countDigits(num);
     int temp = num;
-    int suma = 0;
+    int sum = 0;
 
     while (temp != 0) {
-        int digito = temp % 10;
-        suma += pow(digito, n);
+        int digit = temp % 10;
+        sum += pow(digit, n);
         temp /= 10;
     }
 
-    return suma == num;
+    return sum == num;
 }
 
-void mostrarProcesoEgolatra(int num) {
-    int n = contarDigitos(num);
+void showNarcissisticNumberProcess(int num) {
+    int n = countDigits(num);
     int temp = num;
-    printf("Proceso para el numero %d:\n", num);
+    printf("Proceso para el número %d:\n", num);
 
     while (temp != 0) {
-        int digito = temp % 10;
-        printf("%d^%d ", digito, n);
+        int digit = temp % 10;
+        printf("%d^%d ", digit, n);
         temp /= 10;
 
         if (temp != 0) {
@@ -44,70 +44,70 @@ void mostrarProcesoEgolatra(int num) {
     printf("= %d\n", num);
 }
 
-void generarMatrizMagica(int n) {
-    int matriz[n][n];
-    int numElementos = n * n;
-    int fila = 0, columna = n / 2;
-    int i, siguienteFila, siguienteColumna;
+void generateMagicMatrix(int n) {
+    int matrix[n][n];
+    int numElements = n * n;
+    int row = 0, column = n / 2;
+    int i, nextRow, nextColumn;
 
-    // Inicializar la matriz con ceros
-    for (fila = 0; fila < n; fila++) {
-        for (columna = 0; columna < n; columna++) {
-            matriz[fila][columna] = 0;
+    // Initialize the matrix with zeros
+    for (row = 0; row < n; row++) {
+        for (column = 0; column < n; column++) {
+            matrix[row][column] = 0;
         }
     }
 
-    // Generar la matriz mágica
-    for (i = 1; i <= numElementos; i++) {
-        matriz[fila][columna] = i;
+    // Generate the magic matrix
+    for (i = 1; i <= numElements; i++) {
+        matrix[row][column] = i;
 
-        siguienteFila = (fila + n - 1) % n;
-        siguienteColumna = (columna + 1) % n;
+        nextRow = (row + n - 1) % n;
+        nextColumn = (column + 1) % n;
 
-        if (matriz[siguienteFila][siguienteColumna] != 0) {
-            siguienteFila = (fila + 1) % n;
-            siguienteColumna = columna;
+        if (matrix[nextRow][nextColumn] != 0) {
+            nextRow = (row + 1) % n;
+            nextColumn = column;
         }
 
-        fila = siguienteFila;
-        columna = siguienteColumna;
+        row = nextRow;
+        column = nextColumn;
     }
 
-    // Imprimir la matriz mágica
-    printf("Matriz magica de orden %d x %d:\n", n, n);
-    for (fila = 0; fila < n; fila++) {
-        for (columna = 0; columna < n; columna++) {
-            printf("%2d ", matriz[fila][columna]);
+    // Print the magic matrix
+    printf("\n""Matriz mágica de orden %d x %d:\n", n, n);
+    for (row = 0; row < n; row++) {
+        for (column = 0; column < n; column++) {
+            printf("%2d ", matrix[row][column]);
         }
         printf("\n");
     }
 }
 
-void borrarEspacios(char *cadena) {
-    int longitud = strlen(cadena);
+void removeSpaces(char *str) {
+    int length = strlen(str);
     int i, j = 0;
 
-    for (i = 0; i < longitud; i++) {
-        if (!isspace(cadena[i])) {
-            cadena[j++] = cadena[i];
+    for (i = 0; i < length; i++) {
+        if (!isspace(str[i])) {
+            str[j++] = str[i];
         }
     }
-    cadena[j] = '\0';
+    str[j] = '\0';
 }
 
-void calcularFactoresPrimos(int num) {
+void calculatePrimeFactors(int num) {
     printf("Factores primos de %d: ", num);
 
     for (int factor = 2; factor <= num; factor++) {
-        int exponente = 0;
+        int exponent = 0;
 
         while (num % factor == 0) {
-            exponente++;
+            exponent++;
             num /= factor;
         }
 
-        if (exponente > 0) {
-            printf("%d^%d ", factor, exponente);
+        if (exponent > 0) {
+            printf("%d^%d ", factor, exponent);
         }
     }
 
@@ -115,58 +115,59 @@ void calcularFactoresPrimos(int num) {
 }
 
 int main() {
-    int opcion;
+    int option;
 
-    printf("Seleccione una opción:\n");
+    printf("Seleccione una opcion:\n");
     printf("1. Verificar si un numero es egolatra.\n");
-    printf("2. Generar una matriz magica de orden impar.\n");
-    printf("3. Eliminar los espacios de una cadena de texto.\n");
+    printf("2. Generar una matriz mágica de orden impar.\n");
+    printf("3. Eliminar espacios de una cadena de texto.\n");
     printf("4. Calcular los factores primos de un numero.\n");
-    printf("Ingrese el numero de la opcion: ");
-    scanf("%d", &opcion);
+    printf("Ingrese el numero de opcion: ");
+    scanf("%d", &option);
 
-    switch (opcion) {
+    switch (option) {
         case 1: {
             int num;
-            printf("Ingrese un numero: ");
+            printf("Ingrese un número: ");
             scanf("%d", &num);
 
-            if (esNumeroEgolatra(num)) {
-                printf("%d es un numero egolatra.\n", num);
-                mostrarProcesoEgolatra(num);
+            if (isNarcissisticNumber(num)) {
+                printf("%d is a narcissistic number.\n", num);
+                showNarcissisticNumberProcess(num);
             } else {
-                printf("%d no es un numero egolatra.\n", num);
+
+                printf("%d es un número ególatra.\n", num);
             }
             break;
         }
         case 2: {
             int n;
-            printf("Ingrese el orden impar de la matriz magica: ");
+            printf("Ingrese el orden impar de la matriz mágica: ");
             scanf("%d", &n);
 
             if (n % 2 == 0) {
-                printf("El orden ingresado no es impar. Por favor, ingrese un numero impar.\n");
+                printf("El orden ingresado no es impar. Por favor, ingrese un número impar.\n");
                 return 0;
             }
 
-            generarMatrizMagica(n);
+            generateMagicMatrix(n);
             break;
         }
         case 3: {
-            char cadena[100];
+            char str[100];
             printf("Ingrese una cadena de texto: ");
             getchar();
-            fgets(cadena, sizeof(cadena), stdin);
+            fgets(str, sizeof(str), stdin);
 
-            // Eliminar el salto de línea del final de la cadena (si existe)
-            int longitud = strlen(cadena);
-            if (longitud > 0 &&cadena[longitud - 1] == '\n') {
-                cadena[longitud - 1] = '\0';
+            // Remove the newline character at the end of the string (if present)
+            int length = strlen(str);
+            if (length > 0 && str[length - 1] == '\n') {
+                str[length - 1] = '\0';
             }
 
-            borrarEspacios(cadena);
+            removeSpaces(str);
 
-            printf("Cadena sin espacios: %s\n", cadena);
+            printf("Cadena sin espacios: %s\n", str);
             break;
         }
         case 4: {
@@ -174,11 +175,11 @@ int main() {
             printf("Ingrese un numero: ");
             scanf("%d", &num);
 
-            calcularFactoresPrimos(num);
+            calculatePrimeFactors(num);
             break;
         }
         default:
-            printf("Opción invalida. Por favor, seleccione una opcion valida.\n");
+            printf("Opción inválida. Por favor, seleccione una opción válida.\n");
     }
 
     return 0;
